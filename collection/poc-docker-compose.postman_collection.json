@@ -1,0 +1,52 @@
+{
+  "info": {
+    "name": "POC docker compose",
+    "_postman_id": "abcdef12-3456-7890-abcd-ef1234567890",
+    "description": "Collection simplificada com POST para criar usuário",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Home",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/",
+          "host": ["http://localhost:5000"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "Criar usuário",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Aluno1\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/create_user",
+          "host": ["http://localhost:5000"],
+          "path": ["create_user"]
+        }
+      }
+    },
+    {
+      "name": "Listar usuários",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/list_users",
+          "host": ["http://localhost:5000"],
+          "path": ["list_users"]
+        }
+      }
+    }
+  ]
+}
