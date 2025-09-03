@@ -1,14 +1,18 @@
+# Imagem base Python 3.11 slim
 FROM python:3.11-slim
 
+# Define o diretório de trabalho
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
-
+# Copia e instala dependências
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copia o código da aplicação
 COPY . .
 
+# Expõe a porta 5000
 EXPOSE 5000
 
-CMD ["bash", "./wait-for-db.sh", "gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+# Comando para rodar a aplicação
+CMD ["python", "app.py"]
