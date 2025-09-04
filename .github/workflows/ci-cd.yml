@@ -25,3 +25,7 @@ jobs:
 
       - name: Rodar testes
         run: pytest -v
+
+      - name: Verificar vulnerabilidades
+        run: |
+            bandit -r app.py -ll
