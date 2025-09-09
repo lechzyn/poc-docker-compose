@@ -4,13 +4,16 @@ import os
 
 app = Flask(__name__)
 
-# Configuração do banco usando variáveis de ambiente
-db_user = os.getenv("POSTGRES_USER", "user")
-db_pass = os.getenv("POSTGRES_PASSWORD", "pass")
-db_name = os.getenv("POSTGRES_DB", "mydb")
-db_host = os.getenv("DB_HOST", "db")
+database_url = os.getenv("DATABASE_URL")
+if database_url:
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+else:
+    db_user = os.getenv("POSTGRES_USER", "user")
+    db_pass = os.getenv("POSTGRES_PASSWORD", "pass")
+    db_name = os.getenv("POSTGRES_DB", "mydb")
+    db_host = os.getenv("DB_HOST", "db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{db_user}:{db_pass}@{db_host}:5432/{db_name}"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{db_user}:{db_pass}@{db_host}:5432/{db_name}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
